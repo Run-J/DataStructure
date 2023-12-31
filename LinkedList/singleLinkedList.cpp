@@ -1,4 +1,8 @@
-﻿#include<stdio.h>
+﻿//Filename: singleLinkedList.cpp
+//Programmer: Run Ji 润
+//First Version: December 26, 2023
+
+#include<stdio.h>
 #include<stdlib.h>
 
 typedef struct Node

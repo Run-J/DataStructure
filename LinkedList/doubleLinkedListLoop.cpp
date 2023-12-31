@@ -1,3 +1,7 @@
+﻿//Filename: doubleLinkedListLoop.cpp
+//Programmer: Run Ji 润
+//First Version: December 29, 2023
+
 #include<stdio.h>
 #include<stdlib.h>
 

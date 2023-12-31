@@ -1,4 +1,8 @@
-﻿#include<stdio.h>
+﻿//Filename: singleLinkedList.cpp
+//Programmer: Run Ji 润
+//First Version: December 27, 2023
+
+#include<stdio.h>
 #include<stdlib.h>
 
 #define TURE 1

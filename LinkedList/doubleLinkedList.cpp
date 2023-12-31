@@ -1,4 +1,8 @@
-﻿#include <stdio.h>
+﻿//Filename: doubleLinkedList.cpp
+//Programmer: Run Ji 润
+//First Version: December 28, 2023
+
+#include <stdio.h>
 #include <stdlib.h>
 
 #define TURE 1 
