@@ -1,4 +1,8 @@
-﻿#include<stdio.h>
+﻿﻿//Filename: stringForceMatch.cpp
+//Programmer: Run Ji 润
+//First Version: Janurary 2, 2023
+
+#include<stdio.h>
 #include<stdlib.h>
 #pragma warning(disable:6011)
 #pragma warning(disable:26451)
