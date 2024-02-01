@@ -432,7 +432,7 @@ void deleteTaskByTaskId(task* headNode, int taskId)
 			free(current->description);
 			free(current);
 			printf("Delete %d Successfully.\n\n", taskId);
-			break;
+			return;
 		}
 		current = current->nextTask;
 		pre = pre->nextTask;
