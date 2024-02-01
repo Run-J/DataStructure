@@ -31,9 +31,9 @@ typedef struct task
 	struct task* nextTask;
 }task;
 
-void displayMenu();
-int getUserNumber();
-char* getUserString();
+void displayMenu(void);
+int getUserNumber(void);
+char* getUserString(void);
 task* initTask(void);
 void headAddTask(task* headNode, int taskId, const char* title, const char* description);
 void tailAddTask(task* headNode, int taskId, const char* title, const char* description);
@@ -170,7 +170,7 @@ int main(void)
 // Return Value: void
 // Description: print the menu
 
-void displayMenu() 
+void displayMenu(void) 
 {
 	printf("*******Menu*******\n");
 	printf("Press 1 to Add Task\n");
@@ -187,7 +187,7 @@ void displayMenu()
 // Return Value: char* - user's input string or NULL
 // Description: GetUser input string
 
-char* getUserString()
+char* getUserString(void)
 {
 	char buffer[USERSTRINGBUFFER] = "";
 	if (fgets(buffer, sizeof(buffer), stdin) != NULL)
@@ -223,7 +223,7 @@ char* getUserString()
 // Return Value: int - FAILURE value, or user input number
 // Description: GetUser input number
 
-int getUserNumber()
+int getUserNumber(void)
 {
 	int userChoice = 0;
 	char buffer[USERCHOICEBUFFER] = "";
