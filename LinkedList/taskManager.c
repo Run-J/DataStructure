@@ -62,6 +62,7 @@ int main(void)
 		switch (userChoice)
 		{
 		case 1:
+			{
 			printf("Press 1 to insert from the head, press 2 to insert from the tail: ");
 			int addChoice = getUserNumber();
 			if (addChoice == FAILURE)
@@ -69,8 +70,8 @@ int main(void)
 				printf("Invalid input. Please try again.\n");
 				break; // Skips the remainder of the current loop and restarts the loop
 			}
-			const char* userTaskTitle = NULL;
-			const char* userTaskDescription = NULL;
+			char* userTaskTitle = NULL;
+			char* userTaskDescription = NULL;
 			if (addChoice == 1) // head insert
 			{
 				printf("\nAdding a task...\n");
@@ -116,30 +117,38 @@ int main(void)
 				printf("##ERROR: valid choose, only 1 or 2\n");
 			}
 			break;
+			}
 
 		case 2:
+			{
 			printf("\nDeleting a task...\n");
 			printf("Enter taskId: ");
 			int taskId = getUserNumber();
 			deleteTaskByTaskId(newTaskList, taskId);
 			break;
+			}
 
 		case 3:
+			{
 			printf("\nFinding a task...\n");
 			printf("Enter index: ");
 			int index = getUserNumber();
 			findTaskByIndex(newTaskList, index);
 			break;
-
+			}
 		case 4:
+			{
 			printf("\nPrinting tasks...\n");
 			printTask(newTaskList);
 			break;
+			}
 
 		case 5:
+			{
 			printf("\nExiting...\n");
 			running = 0;
 			break;
+			}
 
 		default:
 			printf("Invalid choice, please try again.\n");
