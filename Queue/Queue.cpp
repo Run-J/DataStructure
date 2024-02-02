@@ -77,8 +77,9 @@ int deQueue(Node* head)
 		int data = node->data;
 		head->next = node->next;
 		free(node);
-		return data;
 		head->data--;
+		return data;
+	
 	}
 }
 
