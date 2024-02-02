@@ -64,102 +64,35 @@ int main(void)
 		switch (userChoice)
 		{
 		case 1:
-<<<<<<< HEAD
 		{
 			printf("Press 1 to insert from the head, press 2 to insert from the tail, or press 3 to intert on the mid >> ");
 			int insertWay = getUserNumber();
 			if (insertWay != 1 && insertWay != 2 && insertWay != 3)
-=======
-			{
-			printf("Press 1 to insert from the head, press 2 to insert from the tail: ");
-			int addChoice = getUserNumber();
-			if (addChoice == FAILURE)
->>>>>>> 185f1289515191180991b2b05ffeba04010e2bbd
 			{
 				printf("Invalid input. Please try again.\n");
 				break; // Skips the remainder of the current loop and restarts the loop
 			}
-<<<<<<< HEAD
-=======
-			char* userTaskTitle = NULL;
-			char* userTaskDescription = NULL;
-			if (addChoice == 1) // head insert
-			{
-				printf("\nAdding a task...\n");
-				printf("Enter taskId: ");
-				int taskId = getUserNumber(); // ask user to input task id 
-				if (taskId == FAILURE)
-				{
-					printf("Invalid input. Please try again.\n");
-					break; // Skips the remainder of the current loop and restarts the loop
-				}
-				printf("Enter taskTitle: ");
-				userTaskTitle = getUserString(); // ask user to input task title
-
-				printf("Enter taskDescription: ");
-				userTaskDescription = getUserString();  // ask user to input task description
-
-				headAddTask(newTaskList, taskId, userTaskTitle, userTaskDescription);
-
-				free(userTaskTitle);
-				free(userTaskDescription);
-				break;
-			}
-			else if (addChoice == 2) // tail insert
-			{
-				printf("\nAdding a task...\n");
-				printf("Enter taskId: ");
-				int taskId = getUserNumber(); // ask user to input task id 
-
-				printf("Enter taskTitle: ");
-				userTaskTitle = getUserString(); // ask user to input task title
-
-				printf("Enter taskDescription: ");
-				userTaskDescription = getUserString();  // ask user to input task description
-
-				tailAddTask(newTaskList, taskId, userTaskTitle, userTaskDescription);
-
-				free(userTaskTitle);
-				free(userTaskDescription);
-				break;
-			}
->>>>>>> 185f1289515191180991b2b05ffeba04010e2bbd
 			else
 			{
 				addTask(newTaskList, insertWay);
 			}
 			break;
-<<<<<<< HEAD
 		}
 		case 2:
 		{
-=======
-			}
-
-		case 2:
-			{
->>>>>>> 185f1289515191180991b2b05ffeba04010e2bbd
 			printf("\nDeleting a task...\n");
 			printf("Enter taskId >> ");
 			int taskId = getUserNumber();
 			deleteTaskByTaskId(newTaskList, taskId);
 			break;
-<<<<<<< HEAD
 		}
 		case 3:
 		{
-=======
-			}
-
-		case 3:
-			{
->>>>>>> 185f1289515191180991b2b05ffeba04010e2bbd
 			printf("\nFinding a task...\n");
 			printf("Enter index >> ");
 			int index = getUserNumber();
 			findTaskByIndex(newTaskList, index);
 			break;
-<<<<<<< HEAD
 		}
 		case 4:
 		{
@@ -173,23 +106,6 @@ int main(void)
 			running = 0;
 			break;
 		}
-=======
-			}
-		case 4:
-			{
-			printf("\nPrinting tasks...\n");
-			printTask(newTaskList);
-			break;
-			}
-
-		case 5:
-			{
-			printf("\nExiting...\n");
-			running = 0;
-			break;
-			}
-
->>>>>>> 185f1289515191180991b2b05ffeba04010e2bbd
 		default:
 		{
 			printf("Invalid choice, please try again.\n");
