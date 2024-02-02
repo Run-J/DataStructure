@@ -1,6 +1,6 @@
 //Filename: taskManager.c
 //Project: Console Based Task Manager
-//Programmer: Run Ji; 
+//Programmer:  Run Ji
 //First version: 01/29/2024
 // Description: Build a console-based task management system using linked lists and structs with dynamic memory allocation in C.
 //			Add Task : Users can choose to add a new task from the head or tail of the task list.
@@ -31,12 +31,14 @@ typedef struct task
 	struct task* nextTask;
 }task;
 
-void displayMenu();
-int getUserNumber();
-char* getUserString();
+void displayMenu(void);
+int getUserNumber(void);
+char* getUserString(void);
 task* initTask(void);
+void addTask(task* headNode, int insertWay);
 void headAddTask(task* headNode, int taskId, const char* title, const char* description);
 void tailAddTask(task* headNode, int taskId, const char* title, const char* description);
+void inteAddTask(task* headNode, int taskId, const char* title, const char* description, int index);
 void printTask(task* headNode);
 void findTaskByIndex(task* headNode, int index);
 void deleteTaskByTaskId(task* headNode, int taskId);
@@ -48,10 +50,10 @@ int main(void)
 	
 	// Calls the appropriate function according to the user's selection. When the user selects 5, running becomes 0.
 	int running = 1;
-	while (running)
+	do
 	{
 		displayMenu();
-		printf("\nPlease choose what you want to do: ");
+		printf("\nPlease choose what you want to do >> ");
 		int userChoice = getUserNumber();
 		if (userChoice == FAILURE) 
 		{
@@ -62,106 +64,109 @@ int main(void)
 		switch (userChoice)
 		{
 		case 1:
-			printf("Press 1 to insert from the head, press 2 to insert from the tail: ");
-			int addChoice = getUserNumber();
-			if (addChoice == FAILURE)
+		{
+			printf("Press 1 to insert from the head, press 2 to insert from the tail, or press 3 to intert on the mid >> ");
+			int insertWay = getUserNumber();
+			if (insertWay != 1 && insertWay != 2 && insertWay != 3)
 			{
 				printf("Invalid input. Please try again.\n");
 				break; // Skips the remainder of the current loop and restarts the loop
 			}
-			const char* userTaskTitle = NULL;
-			const char* userTaskDescription = NULL;
-			if (addChoice == 1) // head insert
-			{
-				printf("\nAdding a task...\n");
-				printf("Enter taskId: ");
-				int taskId = getUserNumber(); // ask user to input task id 
-				if (taskId == FAILURE)
-				{
-					printf("Invalid input. Please try again.\n");
-					break; // Skips the remainder of the current loop and restarts the loop
-				}
-				printf("Enter taskTitle: ");
-				userTaskTitle = getUserString(); // ask user to input task title
-
-				printf("Enter taskDescription: ");
-				userTaskDescription = getUserString();  // ask user to input task description
-
-				headAddTask(newTaskList, taskId, userTaskTitle, userTaskDescription);
-
-				free(userTaskTitle);
-				free(userTaskDescription);
-				break;
-			}
-			else if (addChoice == 2) // tail insert
-			{
-				printf("\nAdding a task...\n");
-				printf("Enter taskId: ");
-				int taskId = getUserNumber(); // ask user to input task id 
-
-				printf("Enter taskTitle: ");
-				userTaskTitle = getUserString(); // ask user to input task title
-
-				printf("Enter taskDescription: ");
-				userTaskDescription = getUserString();  // ask user to input task description
-
-				tailAddTask(newTaskList, taskId, userTaskTitle, userTaskDescription);
-
-				free(userTaskTitle);
-				free(userTaskDescription);
-				break;
-			}
 			else
 			{
-				printf("##ERROR: valid choose, only 1 or 2\n");
+				addTask(newTaskList, insertWay);
 			}
 			break;
-
+		}
 		case 2:
+		{
 			printf("\nDeleting a task...\n");
-			printf("Enter taskId: ");
+			printf("Enter taskId >> ");
 			int taskId = getUserNumber();
 			deleteTaskByTaskId(newTaskList, taskId);
 			break;
-
+		}
 		case 3:
+		{
 			printf("\nFinding a task...\n");
-			printf("Enter index: ");
+			printf("Enter index >> ");
 			int index = getUserNumber();
 			findTaskByIndex(newTaskList, index);
 			break;
-
+		}
 		case 4:
+		{
 			printf("\nPrinting tasks...\n");
 			printTask(newTaskList);
 			break;
-
+		}
 		case 5:
+		{
 			printf("\nExiting...\n");
 			running = 0;
 			break;
-
+		}
 		default:
+		{
 			printf("Invalid choice, please try again.\n");
 		}
-	}
 
-	/* delete following after test
-	headAddTask(newTaskList, 101, "assignment 1", "This is first assignment");
-	headAddTask(newTaskList, 102, "assignment 2", "This is second assignment");
-	headAddTask(newTaskList, 103, "assignment 3", "This is third assignment");
-
-	tailAddTask(newTaskList, 104, "assignment 4", "This is fourth assignment");
-	tailAddTask(newTaskList, 105, "assignment 5", "This is fifth assignment");
-	tailAddTask(newTaskList, 106, "assignment 6", "This is sixth assignment");
-	printTask(newTaskList);
-
-	task* foundTask = findTaskByIndex(newTaskList, 3);
-
-	deleteTaskByTaskId(newTaskList, 102);
-	printTask(newTaskList);*/
+		} // switch end
+	} while (running);
 
 	return 0;
+}
+
+
+// Function: addTask
+// Parameter: 
+//		task* newTaskList - new created linkedlist
+//		int insertWay - who to insert? head or tail or inte
+// Return Value: void
+// Description: 
+
+void addTask(task* newTaskList, int insertWay)
+{
+	printf("\nAdding a task...\n");
+	printf("Enter taskId: ");
+	int taskId = getUserNumber(); // ask user to input task id 
+	if (taskId == FAILURE)
+	{
+		printf("Invalid input. Please try again.\n");
+		return; // Skips the remainder of the current loop and restarts the loop
+	}
+	printf("Enter taskTitle >> ");
+	char* userTaskTitle = (char*)malloc(sizeof(char) * TITLESIZE);
+	userTaskTitle = getUserString(); // ask user to input task title
+
+	printf("Enter taskDescription >> ");
+	char* userTaskDescription = (char*)malloc(sizeof(char) * DESCRIPTIONSIZE);
+	userTaskDescription = getUserString();  // ask user to input task description
+
+	if (insertWay == 1)
+	{
+		headAddTask(newTaskList, taskId, userTaskTitle, userTaskDescription);
+		free(userTaskTitle);
+		free(userTaskDescription);
+		return;
+	}
+	else if (insertWay == 2)
+	{
+		tailAddTask(newTaskList, taskId, userTaskTitle, userTaskDescription);
+		free(userTaskTitle);
+		free(userTaskDescription);
+		return;
+	}
+	else
+	{
+		printf("Enter Index >> ");
+		int index = getUserNumber();
+		inteAddTask(newTaskList, taskId, userTaskTitle, userTaskDescription, index);
+		free(userTaskTitle);
+		free(userTaskDescription);
+		return;
+	}
+	return;
 }
 
 
@@ -170,9 +175,9 @@ int main(void)
 // Return Value: void
 // Description: print the menu
 
-void displayMenu() 
+void displayMenu(void) 
 {
-	printf("*******Menu*******\n");
+	printf("\n*******Menu*******\n");
 	printf("Press 1 to Add Task\n");
 	printf("Press 2 to Delete Task\n");
 	printf("Press 3 to Find Task\n");
@@ -187,7 +192,7 @@ void displayMenu()
 // Return Value: char* - user's input string or NULL
 // Description: GetUser input string
 
-char* getUserString()
+char* getUserString(void)
 {
 	char buffer[USERSTRINGBUFFER] = "";
 	if (fgets(buffer, sizeof(buffer), stdin) != NULL)
@@ -223,14 +228,14 @@ char* getUserString()
 // Return Value: int - FAILURE value, or user input number
 // Description: GetUser input number
 
-int getUserNumber()
+int getUserNumber(void)
 {
 	int userChoice = 0;
 	char buffer[USERCHOICEBUFFER] = "";
 	fgets(buffer, sizeof(buffer), stdin);
 	if (sscanf(buffer, "%d", &userChoice) != 1)
 	{
-		printf("Please enter the correct format (number 1-5)");
+		printf("Please enter the correct format\n");
 		return FAILURE;
 	}
 	return userChoice;
@@ -349,6 +354,62 @@ void tailAddTask(task* headNode, int taskId, const char* title, const char* desc
 }
 
 
+// Function: inteAddTask
+// Parameter:
+//    task* headNode - Pointer to the head node of the task list.
+//    int taskId - The user passes in the taskId by calling the function
+//    const char* title - The user passes in the task title by calling the function
+//    const char* description - The user passes in the task description by calling the function
+//    int index - where user what to insert
+// Return Value: None
+
+void inteAddTask(task* headNode, int taskId, const char* title, const char* description, int index)
+{
+	int countIndex = 0;
+	if (index < 0)
+	{
+		printf("###ERROR: invalid index.\n");
+		return;
+	}
+
+	task* newTask = (task*)malloc(sizeof(task));
+	if (newTask == NULL)
+	{
+		printf("##ERROR: Dynamic memory alloction failure\n");
+		exit(FAILURE);
+	}
+	
+	newTask->title = (char*)malloc(sizeof(char) * TITLESIZE);
+	if (newTask->title == NULL)
+	{
+		printf("##ERROR: Dynamic memory alloction failure\n");
+		exit(FAILURE);
+	}
+	newTask->description = (char*)malloc(sizeof(char) * DESCRIPTIONSIZE);
+	if (newTask->description == NULL)
+	{
+		printf("##ERROR: Dynamic memory alloction failure\n");
+		exit(FAILURE);
+	}
+	newTask->taskId = taskId;
+	strcpy(newTask->title, title);
+	strcpy(newTask->description, description);
+
+	task* current = headNode;
+	while (current != NULL)
+	{
+		if (countIndex == index)
+		{
+			newTask->nextTask = current->nextTask;
+			current->nextTask = newTask;
+			return;
+		}
+		current = current->nextTask;
+		countIndex++;
+	}
+}
+
+
 // Function: printTask
 // Parameter:
 //	  task* headNode - Pointer to the head node of the task list.
@@ -360,6 +421,10 @@ void tailAddTask(task* headNode, int taskId, const char* title, const char* desc
 void printTask(task* headNode)
 {
 	task* current = headNode->nextTask;
+	if (current == NULL)
+	{
+		printf("The linked list is empty\n\n");
+	}
 	while (current != NULL)
 	{
 		printf("Task ID: %d\n", current->taskId);
@@ -423,7 +488,7 @@ void deleteTaskByTaskId(task* headNode, int taskId)
 			free(current->description);
 			free(current);
 			printf("Delete %d Successfully.\n\n", taskId);
-			break;
+			return;
 		}
 		current = current->nextTask;
 		pre = pre->nextTask;
