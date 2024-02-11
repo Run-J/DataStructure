@@ -35,6 +35,7 @@ void displayMenu(void);
 int getUserNumber(void);
 char* getUserString(void);
 task* initTask(void);
+task* createNewTask(int taskId, const char* title, const char* description);
 void addTask(task* headNode, int insertWay);
 void headAddTask(task* headNode, int taskId, const char* title, const char* description);
 void tailAddTask(task* headNode, int taskId, const char* title, const char* description);
@@ -74,6 +75,7 @@ int main(void)
 			}
 			else
 			{
+				printf("\nAdding a task...\n");
 				addTask(newTaskList, insertWay);
 			}
 			break;
@@ -127,7 +129,6 @@ int main(void)
 
 void addTask(task* newTaskList, int insertWay)
 {
-	printf("\nAdding a task...\n");
 	printf("Enter taskId: ");
 	int taskId = getUserNumber(); // ask user to input task id 
 	if (taskId == FAILURE)
@@ -231,14 +232,62 @@ char* getUserString(void)
 int getUserNumber(void)
 {
 	int userChoice = 0;
-	char buffer[USERCHOICEBUFFER] = "";
+	char buffer[USER_NUMBERINPUT_BUFFER] = "";
 	fgets(buffer, sizeof(buffer), stdin);
+
+	char* newlinePos;
+	if ((newlinePos = strchr(buffer, '\n')) != NULL)
+	{
+	*newlinePos = '\0';
+	}
+	else
+	{
+		int clearSstdinBuffer = 0;
+		do 
+		{
+			clearSstdinBuffer = getchar();
+		} while (clearSstdinBuffer != '\n' && clearSstdinBuffer != EOF);
+		printf("###CAUTION: Input is truncated to %d digits\n", USER_NUMBERINPUT_BUFFER-1);
+	}
+	
 	if (sscanf(buffer, "%d", &userChoice) != 1)
 	{
 		printf("Please enter the correct format\n");
 		return FAILURE;
 	}
 	return userChoice;
+}
+
+
+task* createNewTask(int taskId, const char* title, const char* description)
+{
+	task* newTask = (task*)malloc(sizeof(task));
+	if (newTask == NULL)
+	{
+		printf("##ERROR: Dynamic memory allocation failure\n");
+		exit(FAILURE);
+	}
+	newTask->TaskId = taskId;
+	newTask->Title = (char*)malloc(sizeof(char) * (strlen(title) + 1)); // +1 for '\0'
+	if (newTask->Title == NULL)
+	{
+		printf("##ERROR: Dynamic memory allocation failure for title\n");
+		free(newTask);
+		exit(FAILURE);
+	}
+	strcpy(newTask->Title, title);
+
+	newTask->Description = (char*)malloc(sizeof(char) * (strlen(description) + 1)); // +1 for '\0'
+	if (newTask->Description == NULL)
+	{
+		printf("##ERROR: Dynamic memory allocation failure for description\n");
+		free(newTask->Title);
+		free(newTask);
+		exit(FAILURE);
+	}
+	strcpy(newTask->Description, description);
+	newTask->NextTask = NULL;
+	return newTask;
 }
 
 
@@ -280,27 +329,7 @@ task* initTask(void)
 
 void headAddTask(task* headNode,int taskId, const char* title, const char* description)
 {
-	task* newTask = (task*)malloc(sizeof(task));
-	if (newTask == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	newTask->taskId = taskId;
-	newTask->title = (char*)malloc(sizeof(char) * TITLESIZE);
-	if (newTask->title == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	newTask->description = (char*)malloc(sizeof(char) * DESCRIPTIONSIZE);
-	if (newTask->description == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	strcpy(newTask->title, title);
-	strcpy(newTask->description, description);
+	task* newTask = createNewTask(taskId, title, description);
 	newTask->nextTask = headNode->nextTask;
 	headNode->nextTask = newTask;
 }
@@ -326,29 +355,7 @@ void tailAddTask(task* headNode, int taskId, const char* title, const char* desc
 		temp = temp->nextTask;
 	}
 
-	task* newTask = (task*)malloc(sizeof(task));
-	if (newTask == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-
-	newTask->taskId = taskId;
-	newTask->title = (char*)malloc(sizeof(char) * TITLESIZE);
-	if (newTask->title == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	newTask->description = (char*)malloc(sizeof(char) * DESCRIPTIONSIZE);
-	if (newTask->description == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	strcpy(newTask->title, title);
-	strcpy(newTask->description, description);
-	
+	task* newTask = createNewTask(taskId, title, description);
 	newTask->nextTask = NULL;
 	temp->nextTask = newTask;
 }
@@ -372,28 +379,7 @@ void inteAddTask(task* headNode, int taskId, const char* title, const char* desc
 		return;
 	}
 
-	task* newTask = (task*)malloc(sizeof(task));
-	if (newTask == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	
-	newTask->title = (char*)malloc(sizeof(char) * TITLESIZE);
-	if (newTask->title == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	newTask->description = (char*)malloc(sizeof(char) * DESCRIPTIONSIZE);
-	if (newTask->description == NULL)
-	{
-		printf("##ERROR: Dynamic memory alloction failure\n");
-		exit(FAILURE);
-	}
-	newTask->taskId = taskId;
-	strcpy(newTask->title, title);
-	strcpy(newTask->description, description);
+	task* newTask = createNewTask(taskId, title, description);
 
 	task* current = headNode;
 	while (current != NULL)
@@ -479,6 +465,13 @@ void deleteTaskByTaskId(task* headNode, int taskId)
 {
 	task* pre = headNode;
 	task* current = headNode->nextTask;
+
+	if (current == NULL)
+	{
+		printf("Delete Failed. ##ERROR: The list is empty\n\n");
+		return;
+	}
+	
 	while (current != NULL)
 	{
 		if (current->taskId == taskId)
