@@ -15,10 +15,12 @@ As well as the exam date and difficulty (easy exams are automatically scheduled 
 
 As a user, just enter the jobs that need to be done and no longer need to think about how to schedule them, the system will plan them according to the time. So, this program automatically helps me to generate a plan for job completion. 
 
+---
+
 ## What the program can do:
 This program allows manual add/file entry to add things that need to be done and then use the program to perform CRUD operations, in addition the program can automatically generate a schedule based on the time available to be allocated each day.
 
-
+---
 
 ## Program vulnerable to what happens
 1. if the time are inserted in order, it will become linkedlist, the insertion time will become less efficient, so you can choose to use more efficient tree, such as AVL, red balck
