@@ -1,7 +1,7 @@
 # Time Management Assistant Tool
 
 ## Overview
-
+Designed a command-line tool to generate daily schedules based on user-defined working hours, task durations, and deadlines. Users can manually add tasks or load them from a file with auto-scheduling for efficient time allocation.
 
 ---
 
