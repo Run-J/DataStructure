@@ -6,19 +6,13 @@ Designed a command-line tool to generate daily schedules based on user-defined w
 ---
 
 ## Creative Inspiration
-In my daily studies, there will be very many assignments/tests/previews/reviews, etc. All these things will be messy if I don’t plan a perfect schedule. So, I want to build a small program that will help me to plan my assignments/studies schedule.
+In my daily studies, I often have numerous assignments, tests, previews, and reviews to manage. Without a proper schedule, everything can become messy and overwhelming. To address this, I want to build a assistant tool that helps me efficiently plan my assignments and study schedule.
 
-If I have a lot of homework and studying to complete, I would like this program to automatically generate a schedule based on the assignment information/test dates I enter.
+When faced with a large workload, I would like this tool to automatically generate a schedule based on the assignment details and test dates I provide. The input information can include the assignment name, estimated time or hours needed to complete it, and its due date. Additionally, I can input exam dates along with their difficulty level—easy exams are automatically scheduled for one hour of review, average exams for two hours, and difficult exams for three hours.
 
-The information I enter can include the name of the assignment, the difficulty of the assignment (three difficulty levels easy, average, difficult), the estimated time/hours to complete, and the due date.
-As well as the exam date and difficulty (easy exams are automatically scheduled for one hour, average for two hours, and difficult for three hours).
+The scheduler will automatically distribute assignments across different days based on the daily working hours I define. Exam reviews will be scheduled on the day before the exam date to ensure proper preparation.
 
-As a user, just enter the jobs that need to be done and no longer need to think about how to schedule them, the system will plan them according to the time. So, this program automatically helps me to generate a plan for job completion. 
-
----
-
-## What the program can do:
-This program allows manual add/file entry to add things that need to be done and then use the program to perform CRUD operations, in addition the program can automatically generate a schedule based on the time available to be allocated each day.
+As a user, I only need to enter the tasks that need to be completed, and the program will handle the scheduling for me. This system eliminates the need to manually plan and ensures that everything is organized efficiently, automatically generating a plan for completing my tasks.
 
 ---
 
