@@ -1,3 +1,13 @@
+# Time Management Assistant Tool
+
+## Overview
+A comprehensive hotel reservation and management platform hosted on Azure, allowing customers to seamlessly search for room availability, book accommodations via a hotel web portal, and facilitate efficient check-in processes via a desktop app installed in the hotel.
+
+---
+
+## Creative Inspiration
+During my summer vacation in 2024, I traveled to Taipei and stayed at the **CitizenM Hotel**. Using Booking.com to make a reservation, I experienced their seamless check-in process, facilitated by a desktop app in the hotel lobby. Inspired by this system, I set out to create a similar comprehensive hotel reservation and management platform.
+
 ###What the program can do:
 This program allows manual add/file entry to add things that need to be done and then use the program to perform CRUD operations, in addition the program can automatically generate a schedule based on the time available to be allocated each day.
 
