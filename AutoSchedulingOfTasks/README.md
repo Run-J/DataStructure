@@ -23,9 +23,9 @@ This program allows manual add/file entry to add things that need to be done and
 ---
 
 ## Program vulnerable to what happens
-### 1. if the time are inserted in order, it will become linkedlist, the insertion time will become less efficient, so you can choose to use more efficient tree, such as AVL, red balck
-### 2. validation is flawed, exam + review can continue to progress, automatically generated deadlines will lead to late
-### 3. Input of documents may be incorrect due to punctuation.
+1. if the time are inserted in order, it will become linkedlist, the insertion time will become less efficient, so you can choose to use more efficient tree, such as AVL, red balck
+2. validation is flawed, exam + review can continue to progress, automatically generated deadlines will lead to late
+3. Input of documents may be incorrect due to punctuation.
 
 
 
