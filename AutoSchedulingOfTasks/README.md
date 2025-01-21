@@ -16,6 +16,14 @@ As a user, I only need to enter the tasks that need to be completed, and the pro
 
 ---
 
+## Key Features
+
+---
+
+## Demo
+
+---
+
 ## Technology
 C, Data Structures, Linux, GCC, GDB, Makefile
 
