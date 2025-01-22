@@ -24,6 +24,55 @@ As a user, I only need to enter the tasks that need to be completed, and the pro
 
 ## How Data Structures Be Used
 
+### Goal and Data Structure Selection
+
+The program's goal is to **optimize time complexity**. The main requirements include:
+- **Sorting tasks by date** to list all current tasks.
+- **Searching for task details** by name.
+- **Searching for tasks on a specific date.**
+- **Inserting new tasks** and **deleting completed tasks.**
+- **Generating a schedule** based on tasks.
+
+To meet these requirements efficiently, the following **data structures** are used:
+
+### **Hash Table + Linked List**
+- **Purpose:**  
+  Used for **searching task details by name** and **retrieving tasks by date**, as well as for insertion and deletion.
+- **Why Hash Table:**  
+  - Provides **O(1)** time complexity for insertions and lookups using **key-value pairs**.
+  - Inefficient for sorting, so a **BST** is used for that purpose.
+- **Collision Handling:**  
+  - **Separate Chaining:** Uses **linked lists** to store multiple tasks that hash to the same index.
+
+### **BST + Recursion (Default Option)**  
+- **Purpose:**  
+  Used to **sort tasks by date** and **list them in ascending order of due dates**.
+- **Why Recursion:**  
+  - Provides straightforward and **readable code** for **in-order traversal**.
+  - Suitable for trees of moderate depth where stack overflow is unlikely.
+
+#### **Iterative + Manual Stack (Optional Alternative):**
+- **Purpose:**  
+  An alternative to recursion for **in-order traversal** in cases where the tree depth is very large.
+- **Advantages:**
+  - **Prevents stack overflow** for deep trees.
+  - Offers better control over the traversal process.
+- **Trade-offs:**
+  - May increase code complexity compared to recursion.
+  - Avoids the overhead of recursive function calls in specific cases.
+
+### **Array + Linked List**
+- **Purpose:**  
+  Implements the **scheduler**, where tasks and exams are organized by day.
+- **Structure:**
+  - **Array:** Represents up to 31 days in a month for **O(1)** access to specific days.
+  - **Linked List:** Dynamically stores tasks for each day, supporting varying workloads.
+- **Benefits:**  
+  - Combines **efficient access** with **dynamic task storage.**
+  - Ensures **flexible scheduling** and task retrieval while maintaining daily work limits.
+
+This structure ensures the program achieves **optimal time complexity** while addressing the specific requirements efficiently.
+
 ---
 
 ## Demo
