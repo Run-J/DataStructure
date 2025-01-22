@@ -17,6 +17,12 @@ As a user, I only need to enter the tasks that need to be completed, and the pro
 ---
 
 ## Key Features
+1. Built on Linux using GCC, GDB, and Makefile for streamlined builds.
+2. Leveraged data structures (e.g., BST, hash tables, stacks, and linked lists) for optimized task management and improved time complexity.
+
+---
+
+## How Data Structures Be Used
 
 ---
 
