@@ -35,7 +35,7 @@ The program's goal is to **optimize time complexity**. The main requirements inc
 
 To meet these requirements efficiently, the following **data structures** are used:
 
-### **Hash Table + Linked List**
+### **1: Hash Table + Linked List**
 - **Purpose:**  
   Used for **searching task details by name** and **retrieving tasks by date**, as well as for insertion and deletion.
 - **Why Hash Table:**  
@@ -44,14 +44,14 @@ To meet these requirements efficiently, the following **data structures** are us
 - **Collision Handling:**  
   - **Separate Chaining:** Uses **linked lists** to store multiple tasks that hash to the same index.
 
-### **BST + Recursion (Default Option)**  
+### **2: BST + Recursion (Default Option)**  
 - **Purpose:**  
   Used to **sort tasks by date** and **list them in ascending order of due dates**.
 - **Why Recursion:**  
   - Provides straightforward and **readable code** for **in-order traversal**.
   - Suitable for trees of moderate depth where stack overflow is unlikely.
 
-#### **Iterative + Manual Stack (Optional Alternative):**
+#### **2.1: Iterative + Manual Stack (Optional Alternative):**
 - **Purpose:**  
   An alternative to recursion for **in-order traversal** in cases where the tree depth is very large.
 - **Advantages:**
@@ -61,7 +61,7 @@ To meet these requirements efficiently, the following **data structures** are us
   - May increase code complexity compared to recursion.
   - Avoids the overhead of recursive function calls in specific cases.
 
-### **Array + Linked List**
+### **3: Array + Linked List**
 - **Purpose:**  
   Implements the **scheduler**, where tasks and exams are organized by day.
 - **Structure:**
